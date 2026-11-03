@@ -22,10 +22,10 @@
 
 | Role | Name | Enrollment No. | GitHub Username |
 |------|------|----------------|-----------------|
-| Group Lead | | | |
-| Member 2 | | | |
-| Member 3 | | | |
-| Member 4 | | | |
+| Group Lead | Aniket Kumar | 2501010635 |NopePlague
+| Member 2 | Aditya Kumar Gupta | 2501010565 | AdityaGupta-2006 |
+| Member 3 | Anik Kumar Deo | 2501010056 | Source-sucker |
+| Member 4 | Muskan Praveen | 251010602 | mukku2549 |
 
 **Team No.:** ____ · **Section:** ____ · **Repository URL:** ____
 
