@@ -1,12 +1,27 @@
 {
-  "aditya kumar gupta ": "AdityaGupta-2006",
-
-
-  "aniket kumar": "NopePlague",
-
-
-  "anik kumar deo": "Source-sucker",
-
-
-  "muskan praveen": "mukku2549"
+  "team_number": "[MANUAL_INPUT_REQUIRED]",
+  "group_lead": {
+    "name": "Aniket Kumar",
+    "enrollment_no": "2501010635",
+    "github": "NopePlague"
+  },
+  "members": [
+    {
+      "name": "Aditya Kumar Gupta",
+      "enrollment_no": "2501010565",
+      "github": "AdityaGupta-2006"
+    },
+    {
+      "name": "Anik Kumar Deo",
+      "enrollment_no": "2501010056",
+      "github": "Source-sucker"
+    },
+    {
+      "name": "Muskan Praveen",
+      "enrollment_no": "251010602",
+      "github": "mukku2549"
+    }
+  ],
+  "postgres_version": "PostgreSQL 18.6",
+  "laptop_used_for_benchmarks": "Apple M4 (Mac16,1, Apple Silicon)"
 }

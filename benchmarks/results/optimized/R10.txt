@@ -1,175 +1,105 @@
 === R10 run 1 ===
-Sort  (cost=277.61..277.73 rows=48 width=26) (actual time=1.346..1.347 rows=17.00 loops=1)
+Sort  (cost=277.61..277.73 rows=48 width=26) (actual time=2.383..2.385 rows=17.00 loops=1)
   Sort Key: ((- sum(m.quantity))) DESC
   Sort Method: quicksort  Memory: 25kB
-  Buffers: shared hit=64 read=13
-  ->  HashAggregate  (cost=275.67..276.27 rows=48 width=26) (actual time=1.324..1.326 rows=17.00 loops=1)
+  Buffers: shared hit=26 read=51
+  ->  HashAggregate  (cost=275.67..276.27 rows=48 width=26) (actual time=2.364..2.367 rows=17.00 loops=1)
         Group Key: c.category_name, m.movement_type
         Batches: 1  Memory Usage: 32kB
-        Buffers: shared hit=61 read=13
-        ->  Hash Join  (cost=55.31..271.41 rows=567 width=22) (actual time=0.338..1.207 rows=570.00 loops=1)
+        Buffers: shared hit=23 read=51
+        ->  Hash Join  (cost=55.31..271.41 rows=567 width=22) (actual time=0.518..2.248 rows=570.00 loops=1)
               Hash Cond: (p.category_id = c.category_id)
-              Buffers: shared hit=61 read=13
-              ->  Hash Join  (cost=54.04..268.13 rows=567 width=16) (actual time=0.317..1.115 rows=570.00 loops=1)
+              Buffers: shared hit=23 read=51
+              ->  Hash Join  (cost=54.04..268.13 rows=567 width=16) (actual time=0.501..2.152 rows=570.00 loops=1)
                     Hash Cond: (m.product_id = p.product_id)
-                    Buffers: shared hit=60 read=13
-                    ->  Index Scan using idx_inventory_movements_moved_at on inventory_movements m  (cost=0.29..212.90 rows=567 width=16) (actual time=0.020..0.724 rows=570.00 loops=1)
+                    Buffers: shared hit=22 read=51
+                    ->  Index Scan using idx_inventory_movements_moved_at on inventory_movements m  (cost=0.29..212.90 rows=567 width=16) (actual time=0.239..1.787 rows=570.00 loops=1)
                           Index Cond: ((moved_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (moved_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
                           Filter: ((movement_type)::text = ANY ('{EXPIRY,DAMAGE}'::text[]))
                           Rows Removed by Filter: 4375
                           Index Searches: 1
-                          Buffers: shared hit=40 read=13
-                    ->  Hash  (cost=35.00..35.00 rows=1500 width=8) (actual time=0.289..0.289 rows=1500.00 loops=1)
+                          Buffers: shared hit=2 read=51
+                    ->  Hash  (cost=35.00..35.00 rows=1500 width=8) (actual time=0.254..0.254 rows=1500.00 loops=1)
                           Buckets: 2048  Batches: 1  Memory Usage: 75kB
                           Buffers: shared hit=20
-                          ->  Seq Scan on products p  (cost=0.00..35.00 rows=1500 width=8) (actual time=0.005..0.183 rows=1500.00 loops=1)
-                                Buffers: shared hit=20
-              ->  Hash  (cost=1.12..1.12 rows=12 width=14) (actual time=0.017..0.017 rows=12.00 loops=1)
-                    Buckets: 1024  Batches: 1  Memory Usage: 9kB
-                    Buffers: shared hit=1
-                    ->  Seq Scan on categories c  (cost=0.00..1.12 rows=12 width=14) (actual time=0.003..0.005 rows=12.00 loops=1)
-                          Buffers: shared hit=1
-Planning:
-  Buffers: shared hit=426 read=5
-Planning Time: 1.550 ms
-Execution Time: 1.420 ms
-=== R10 run 2 ===
-Sort  (cost=277.61..277.73 rows=48 width=26) (actual time=1.305..1.307 rows=17.00 loops=1)
-  Sort Key: ((- sum(m.quantity))) DESC
-  Sort Method: quicksort  Memory: 25kB
-  Buffers: shared hit=77
-  ->  HashAggregate  (cost=275.67..276.27 rows=48 width=26) (actual time=1.283..1.286 rows=17.00 loops=1)
-        Group Key: c.category_name, m.movement_type
-        Batches: 1  Memory Usage: 32kB
-        Buffers: shared hit=74
-        ->  Hash Join  (cost=55.31..271.41 rows=567 width=22) (actual time=0.319..1.173 rows=570.00 loops=1)
-              Hash Cond: (p.category_id = c.category_id)
-              Buffers: shared hit=74
-              ->  Hash Join  (cost=54.04..268.13 rows=567 width=16) (actual time=0.299..1.082 rows=570.00 loops=1)
-                    Hash Cond: (m.product_id = p.product_id)
-                    Buffers: shared hit=73
-                    ->  Index Scan using idx_inventory_movements_moved_at on inventory_movements m  (cost=0.29..212.90 rows=567 width=16) (actual time=0.016..0.709 rows=570.00 loops=1)
-                          Index Cond: ((moved_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (moved_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
-                          Filter: ((movement_type)::text = ANY ('{EXPIRY,DAMAGE}'::text[]))
-                          Rows Removed by Filter: 4375
-                          Index Searches: 1
-                          Buffers: shared hit=53
-                    ->  Hash  (cost=35.00..35.00 rows=1500 width=8) (actual time=0.275..0.276 rows=1500.00 loops=1)
-                          Buckets: 2048  Batches: 1  Memory Usage: 75kB
-                          Buffers: shared hit=20
-                          ->  Seq Scan on products p  (cost=0.00..35.00 rows=1500 width=8) (actual time=0.005..0.164 rows=1500.00 loops=1)
-                                Buffers: shared hit=20
-              ->  Hash  (cost=1.12..1.12 rows=12 width=14) (actual time=0.016..0.016 rows=12.00 loops=1)
-                    Buckets: 1024  Batches: 1  Memory Usage: 9kB
-                    Buffers: shared hit=1
-                    ->  Seq Scan on categories c  (cost=0.00..1.12 rows=12 width=14) (actual time=0.003..0.004 rows=12.00 loops=1)
-                          Buffers: shared hit=1
-Planning:
-  Buffers: shared hit=429
-Planning Time: 1.310 ms
-Execution Time: 1.380 ms
-=== R10 run 3 ===
-Sort  (cost=277.61..277.73 rows=48 width=26) (actual time=1.267..1.270 rows=17.00 loops=1)
-  Sort Key: ((- sum(m.quantity))) DESC
-  Sort Method: quicksort  Memory: 25kB
-  Buffers: shared hit=77
-  ->  HashAggregate  (cost=275.67..276.27 rows=48 width=26) (actual time=1.248..1.252 rows=17.00 loops=1)
-        Group Key: c.category_name, m.movement_type
-        Batches: 1  Memory Usage: 32kB
-        Buffers: shared hit=74
-        ->  Hash Join  (cost=55.31..271.41 rows=567 width=22) (actual time=0.311..1.140 rows=570.00 loops=1)
-              Hash Cond: (p.category_id = c.category_id)
-              Buffers: shared hit=74
-              ->  Hash Join  (cost=54.04..268.13 rows=567 width=16) (actual time=0.291..1.047 rows=570.00 loops=1)
-                    Hash Cond: (m.product_id = p.product_id)
-                    Buffers: shared hit=73
-                    ->  Index Scan using idx_inventory_movements_moved_at on inventory_movements m  (cost=0.29..212.90 rows=567 width=16) (actual time=0.016..0.679 rows=570.00 loops=1)
-                          Index Cond: ((moved_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (moved_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
-                          Filter: ((movement_type)::text = ANY ('{EXPIRY,DAMAGE}'::text[]))
-                          Rows Removed by Filter: 4375
-                          Index Searches: 1
-                          Buffers: shared hit=53
-                    ->  Hash  (cost=35.00..35.00 rows=1500 width=8) (actual time=0.267..0.268 rows=1500.00 loops=1)
-                          Buckets: 2048  Batches: 1  Memory Usage: 75kB
-                          Buffers: shared hit=20
-                          ->  Seq Scan on products p  (cost=0.00..35.00 rows=1500 width=8) (actual time=0.005..0.164 rows=1500.00 loops=1)
-                                Buffers: shared hit=20
-              ->  Hash  (cost=1.12..1.12 rows=12 width=14) (actual time=0.015..0.015 rows=12.00 loops=1)
-                    Buckets: 1024  Batches: 1  Memory Usage: 9kB
-                    Buffers: shared hit=1
-                    ->  Seq Scan on categories c  (cost=0.00..1.12 rows=12 width=14) (actual time=0.004..0.005 rows=12.00 loops=1)
-                          Buffers: shared hit=1
-Planning:
-  Buffers: shared hit=429
-Planning Time: 1.308 ms
-Execution Time: 1.344 ms
-=== R10 run 4 ===
-Sort  (cost=277.61..277.73 rows=48 width=26) (actual time=1.336..1.338 rows=17.00 loops=1)
-  Sort Key: ((- sum(m.quantity))) DESC
-  Sort Method: quicksort  Memory: 25kB
-  Buffers: shared hit=77
-  ->  HashAggregate  (cost=275.67..276.27 rows=48 width=26) (actual time=1.316..1.320 rows=17.00 loops=1)
-        Group Key: c.category_name, m.movement_type
-        Batches: 1  Memory Usage: 32kB
-        Buffers: shared hit=74
-        ->  Hash Join  (cost=55.31..271.41 rows=567 width=22) (actual time=0.341..1.202 rows=570.00 loops=1)
-              Hash Cond: (p.category_id = c.category_id)
-              Buffers: shared hit=74
-              ->  Hash Join  (cost=54.04..268.13 rows=567 width=16) (actual time=0.323..1.112 rows=570.00 loops=1)
-                    Hash Cond: (m.product_id = p.product_id)
-                    Buffers: shared hit=73
-                    ->  Index Scan using idx_inventory_movements_moved_at on inventory_movements m  (cost=0.29..212.90 rows=567 width=16) (actual time=0.016..0.707 rows=570.00 loops=1)
-                          Index Cond: ((moved_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (moved_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
-                          Filter: ((movement_type)::text = ANY ('{EXPIRY,DAMAGE}'::text[]))
-                          Rows Removed by Filter: 4375
-                          Index Searches: 1
-                          Buffers: shared hit=53
-                    ->  Hash  (cost=35.00..35.00 rows=1500 width=8) (actual time=0.292..0.292 rows=1500.00 loops=1)
-                          Buckets: 2048  Batches: 1  Memory Usage: 75kB
-                          Buffers: shared hit=20
-                          ->  Seq Scan on products p  (cost=0.00..35.00 rows=1500 width=8) (actual time=0.005..0.180 rows=1500.00 loops=1)
+                          ->  Seq Scan on products p  (cost=0.00..35.00 rows=1500 width=8) (actual time=0.005..0.148 rows=1500.00 loops=1)
                                 Buffers: shared hit=20
               ->  Hash  (cost=1.12..1.12 rows=12 width=14) (actual time=0.013..0.013 rows=12.00 loops=1)
                     Buckets: 1024  Batches: 1  Memory Usage: 9kB
                     Buffers: shared hit=1
-                    ->  Seq Scan on categories c  (cost=0.00..1.12 rows=12 width=14) (actual time=0.003..0.004 rows=12.00 loops=1)
+                    ->  Seq Scan on categories c  (cost=0.00..1.12 rows=12 width=14) (actual time=0.004..0.005 rows=12.00 loops=1)
                           Buffers: shared hit=1
 Planning:
-  Buffers: shared hit=429
-Planning Time: 1.381 ms
-Execution Time: 1.414 ms
-=== R10 run 5 ===
-Sort  (cost=277.61..277.73 rows=48 width=26) (actual time=1.331..1.333 rows=17.00 loops=1)
+  Buffers: shared hit=419 read=10
+Planning Time: 2.494 ms
+Execution Time: 2.454 ms
+=== R10 run 2 ===
+Sort  (cost=277.61..277.73 rows=48 width=26) (actual time=1.234..1.235 rows=17.00 loops=1)
   Sort Key: ((- sum(m.quantity))) DESC
   Sort Method: quicksort  Memory: 25kB
   Buffers: shared hit=77
-  ->  HashAggregate  (cost=275.67..276.27 rows=48 width=26) (actual time=1.311..1.314 rows=17.00 loops=1)
+  ->  HashAggregate  (cost=275.67..276.27 rows=48 width=26) (actual time=1.216..1.219 rows=17.00 loops=1)
         Group Key: c.category_name, m.movement_type
         Batches: 1  Memory Usage: 32kB
         Buffers: shared hit=74
-        ->  Hash Join  (cost=55.31..271.41 rows=567 width=22) (actual time=0.325..1.184 rows=570.00 loops=1)
+        ->  Hash Join  (cost=55.31..271.41 rows=567 width=22) (actual time=0.297..1.088 rows=570.00 loops=1)
               Hash Cond: (p.category_id = c.category_id)
               Buffers: shared hit=74
-              ->  Hash Join  (cost=54.04..268.13 rows=567 width=16) (actual time=0.304..1.091 rows=570.00 loops=1)
+              ->  Hash Join  (cost=54.04..268.13 rows=567 width=16) (actual time=0.280..0.999 rows=570.00 loops=1)
                     Hash Cond: (m.product_id = p.product_id)
                     Buffers: shared hit=73
-                    ->  Index Scan using idx_inventory_movements_moved_at on inventory_movements m  (cost=0.29..212.90 rows=567 width=16) (actual time=0.016..0.709 rows=570.00 loops=1)
+                    ->  Index Scan using idx_inventory_movements_moved_at on inventory_movements m  (cost=0.29..212.90 rows=567 width=16) (actual time=0.012..0.637 rows=570.00 loops=1)
                           Index Cond: ((moved_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (moved_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
                           Filter: ((movement_type)::text = ANY ('{EXPIRY,DAMAGE}'::text[]))
                           Rows Removed by Filter: 4375
                           Index Searches: 1
                           Buffers: shared hit=53
-                    ->  Hash  (cost=35.00..35.00 rows=1500 width=8) (actual time=0.280..0.281 rows=1500.00 loops=1)
+                    ->  Hash  (cost=35.00..35.00 rows=1500 width=8) (actual time=0.261..0.261 rows=1500.00 loops=1)
                           Buckets: 2048  Batches: 1  Memory Usage: 75kB
                           Buffers: shared hit=20
-                          ->  Seq Scan on products p  (cost=0.00..35.00 rows=1500 width=8) (actual time=0.005..0.169 rows=1500.00 loops=1)
+                          ->  Seq Scan on products p  (cost=0.00..35.00 rows=1500 width=8) (actual time=0.004..0.145 rows=1500.00 loops=1)
                                 Buffers: shared hit=20
-              ->  Hash  (cost=1.12..1.12 rows=12 width=14) (actual time=0.015..0.015 rows=12.00 loops=1)
+              ->  Hash  (cost=1.12..1.12 rows=12 width=14) (actual time=0.012..0.013 rows=12.00 loops=1)
+                    Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                    Buffers: shared hit=1
+                    ->  Seq Scan on categories c  (cost=0.00..1.12 rows=12 width=14) (actual time=0.003..0.004 rows=12.00 loops=1)
+                          Buffers: shared hit=1
+Planning:
+  Buffers: shared hit=429
+Planning Time: 1.133 ms
+Execution Time: 1.291 ms
+=== R10 run 3 ===
+Sort  (cost=277.61..277.73 rows=48 width=26) (actual time=1.324..1.326 rows=17.00 loops=1)
+  Sort Key: ((- sum(m.quantity))) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=77
+  ->  HashAggregate  (cost=275.67..276.27 rows=48 width=26) (actual time=1.301..1.304 rows=17.00 loops=1)
+        Group Key: c.category_name, m.movement_type
+        Batches: 1  Memory Usage: 32kB
+        Buffers: shared hit=74
+        ->  Hash Join  (cost=55.31..271.41 rows=567 width=22) (actual time=0.324..1.188 rows=570.00 loops=1)
+              Hash Cond: (p.category_id = c.category_id)
+              Buffers: shared hit=74
+              ->  Hash Join  (cost=54.04..268.13 rows=567 width=16) (actual time=0.302..1.095 rows=570.00 loops=1)
+                    Hash Cond: (m.product_id = p.product_id)
+                    Buffers: shared hit=73
+                    ->  Index Scan using idx_inventory_movements_moved_at on inventory_movements m  (cost=0.29..212.90 rows=567 width=16) (actual time=0.015..0.712 rows=570.00 loops=1)
+                          Index Cond: ((moved_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (moved_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                          Filter: ((movement_type)::text = ANY ('{EXPIRY,DAMAGE}'::text[]))
+                          Rows Removed by Filter: 4375
+                          Index Searches: 1
+                          Buffers: shared hit=53
+                    ->  Hash  (cost=35.00..35.00 rows=1500 width=8) (actual time=0.280..0.280 rows=1500.00 loops=1)
+                          Buckets: 2048  Batches: 1  Memory Usage: 75kB
+                          Buffers: shared hit=20
+                          ->  Seq Scan on products p  (cost=0.00..35.00 rows=1500 width=8) (actual time=0.005..0.170 rows=1500.00 loops=1)
+                                Buffers: shared hit=20
+              ->  Hash  (cost=1.12..1.12 rows=12 width=14) (actual time=0.016..0.016 rows=12.00 loops=1)
                     Buckets: 1024  Batches: 1  Memory Usage: 9kB
                     Buffers: shared hit=1
                     ->  Seq Scan on categories c  (cost=0.00..1.12 rows=12 width=14) (actual time=0.004..0.005 rows=12.00 loops=1)
                           Buffers: shared hit=1
 Planning:
   Buffers: shared hit=429
-Planning Time: 1.357 ms
-Execution Time: 1.413 ms
+Planning Time: 1.330 ms
+Execution Time: 1.394 ms

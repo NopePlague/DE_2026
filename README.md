@@ -9,7 +9,7 @@
 | Path | What it is |
 |------|------------|
 | `README.md` | This project brief |
-| `seed_data.zip` | 10 CSV files (675,000 orders): the only input for Phase 2. Unzip it to get `seed_data/` |
+| `seed_data.zip` | 10 CSV files (150,000 orders, 675,000 order_items): the only input for Phase 2. Unzip it to get `seed_data/` |
 | `queries/workload_30.sql` | The 30 queries for Phase 3 (do not edit) |
 | `benchmarks/run_benchmark.sh` | Timing script: 3 runs per query, average, raw plans saved |
 | `CHECKPOINTS.md` | Checkpoint dates and the files each one needs (DE and AP repos) |
@@ -22,12 +22,12 @@
 
 | Role | Name | Enrollment No. | GitHub Username |
 |------|------|----------------|-----------------|
-| Group Lead | Aniket Kumar | 2501010635 |NopePlague
+| Group Lead | Aniket Kumar | 2501010635 | NopePlague |
 | Member 2 | Aditya Kumar Gupta | 2501010565 | AdityaGupta-2006 |
 | Member 3 | Anik Kumar Deo | 2501010056 | Source-sucker |
 | Member 4 | Muskan Praveen | 251010602 | mukku2549 |
 
-**Team No.:** ____ · **Section:** ____ · **Repository URL:** ____
+**Team No.:** [MANUAL_INPUT_REQUIRED] · **Section:** [MANUAL_INPUT_REQUIRED] · **Repository URL:** https://github.com/NopePlague/DE_2026.git
 
 ---
 
@@ -308,7 +308,7 @@ Also include:
 
 ## Phase 5: Scalability report (large dataset round)
 
-Your optimizations worked on 675,000 orders. Next year the business expects **20× the volume**.
+Your optimizations worked on 150,000 orders (675,000 order_items). Next year the business expects **20× the volume**.
 
 By **Thu 19 Nov 2026**, faculty will release **`large_data.zip`**: the same 10 CSV files with about **20× the rows** (≈ 3,000,000 orders, ≈ 13,500,000 order items, ≈ 2,520,000 store inventory, ≈ 1,800,000 inventory movements, ≈ 800,000 customers). Until then, work on the design part of the report.
 
