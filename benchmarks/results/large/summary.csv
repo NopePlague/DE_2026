@@ -1,0 +1,31 @@
+query_id,type,avg_ms,median_ms,min_ms,max_ms,scan_nodes
+R01,READ,0.678,0.617,0.595,0.822,Seq Scan on dark_stores
+R02,READ,0.838,0.615,0.515,1.385,Seq Scan on categories | Bitmap Heap Scan on products | Bitmap Index Scan on idx_products_category_id | Index Scan using idx_store_inventory_product_store on store_inventory
+R03,READ,0.328,0.324,0.309,0.350,Bitmap Heap Scan on products | Bitmap Index Scan on idx_products_name_trgm | Index Scan using idx_store_inventory_product_store on store_inventory
+R04,READ,1.353,1.051,0.971,2.037,Seq Scan on dark_stores | Index Scan using idx_store_inventory_product_store on store_inventory
+R05,READ,0.060,0.053,0.050,0.078,Index Scan using store_inventory_pkey on store_inventory
+R06,READ,0.046,0.051,0.032,0.056,Index Scan using idx_orders_customer_placed on orders
+R07,READ,0.285,0.050,0.048,0.756,Index Scan using idx_orders_store_status_placed on orders
+R08,READ,211.667,212.838,207.984,214.178,Bitmap Heap Scan on orders | Bitmap Index Scan on idx_orders_placed_at
+R09,READ,0.716,0.657,0.657,0.834,Index Scan using store_inventory_pkey on store_inventory | Seq Scan on products
+R10,READ,26.048,19.468,18.296,40.380,Bitmap Heap Scan on inventory_movements | Bitmap Index Scan on idx_inventory_movements_type_date | Seq Scan on products | Seq Scan on categories
+R11,READ,0.544,0.398,0.393,0.840,Bitmap Heap Scan on orders | Bitmap Index Scan on idx_orders_store_status_placed
+R12,READ,45.879,38.686,38.157,60.793,Index Only Scan using idx_order_items_product_order on order_items | Index Only Scan using order_items_pkey on order_items
+R13,READ,124.858,113.632,96.880,164.063,Seq Scan on products | Index Only Scan using idx_order_items_substitute_product on order_items | Index Scan using orders_pkey on orders
+R14,READ,1773.438,1790.059,1724.321,1805.933,Seq Scan on order_items | Bitmap Heap Scan on orders | Bitmap Index Scan on idx_orders_placed_at
+R15,READ,28.793,13.718,13.708,58.954,Index Scan using dark_stores_pkey on dark_stores | Index Only Scan using idx_orders_store_status_placed on orders
+R16,READ,1619.699,1613.768,1588.990,1656.338,Index Only Scan using idx_orders_customer_placed on orders
+R17,READ,1097.081,1090.576,1082.530,1118.138,Bitmap Heap Scan on orders | Bitmap Index Scan on idx_orders_placed_at | Seq Scan on dark_stores
+R18,READ,2.628,2.022,1.943,3.919,Index Scan using store_inventory_pkey on store_inventory | Index Scan using products_pkey on products | Bitmap Heap Scan on orders | Bitmap Index Scan on idx_orders_store_status_placed | Index Only Scan using order_items_pkey on order_items
+R19,READ,1793.490,1793.652,1786.415,1800.404,Seq Scan on categories | Seq Scan on order_items | Bitmap Heap Scan on orders | Bitmap Index Scan on idx_orders_placed_at | Bitmap Heap Scan on products | Bitmap Index Scan on idx_products_category_id
+R20,READ,262.391,267.102,251.789,268.283,Bitmap Heap Scan on orders | Bitmap Index Scan on idx_orders_placed_at
+R21,READ,2.298,0.122,0.118,6.655,Index Scan using idx_riders_store_active on riders | Index Only Scan using idx_orders_rider_placed on orders
+R22,READ,213.279,213.123,203.054,223.661,Index Scan using idx_orders_placed_at on orders
+R23,READ,0.100,0.054,0.036,0.209,Index Scan using products_sku_key on products
+R24,READ,0.160,0.150,0.133,0.198,Bitmap Heap Scan on inventory_movements | Bitmap Index Scan on idx_inventory_movements_store_type_date
+R25,READ,646.962,652.716,629.329,658.841,Seq Scan on orders | Index Scan using idx_customers_city_id on customers
+W01,WRITE,1.840,1.060,0.964,3.497,(no scan)
+W02,WRITE,0.784,0.363,0.358,1.630,Index Only Scan using idx_orders_store_active_placed on orders | Index Scan using order_items_pkey on order_items | Index Scan using idx_store_inventory_product_store on store_inventory
+W03,WRITE,0.667,0.494,0.475,1.031,Index Only Scan using idx_orders_packing_status on orders | Index Scan using orders_pkey on orders | Index Only Scan using idx_riders_store_active on riders
+W04,WRITE,2.421,2.243,1.908,3.111,Index Scan using store_inventory_pkey on store_inventory
+W05,WRITE,568.339,574.576,551.418,579.023,Seq Scan on inventory_movements
