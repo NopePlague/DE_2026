@@ -24,7 +24,7 @@ R22,READ,67.693,68.111,65.926,69.043,Seq Scan on orders
 R23,READ,0.210,0.053,0.050,0.528,Index Scan using products_sku_key on products
 R24,READ,5.363,5.379,5.324,5.386,Seq Scan on inventory_movements
 R25,READ,27.661,27.609,27.540,27.834,Seq Scan on orders | Seq Scan on customers
-W01,WRITE,2.301,2.618,1.117,3.169,(no scan)
+W01,WRITE,2.301,2.618,1.117,3.169,No scan nodes
 W02,WRITE,22.607,22.079,19.881,25.861,Seq Scan on orders | Index Scan using order_items_pkey on order_items | Index Scan using store_inventory_pkey on store_inventory
 W03,WRITE,23.810,23.083,22.869,25.478,Index Scan using orders_pkey on orders | Index Scan using riders_pkey on riders
 W04,WRITE,2.010,1.947,1.878,2.205,Bitmap Heap Scan on store_inventory | Bitmap Index Scan on store_inventory_pkey
